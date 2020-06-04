@@ -236,6 +236,9 @@ function randomPlanetPos(){
   SPACEXPLORERS.earth.pos.y = Math.floor(Math.random() *400) +50;
   SPACEXPLORERS.enemyShip.pos.x = Math.floor(Math.random() *1200) +50;
   SPACEXPLORERS.enemyShip.pos.y = Math.floor(Math.random() *400) +50;
+  if(SPACEXPLORERS.enemyShip.pos.y + 5 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.y - 5 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.x + 5 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.x - 5 < SPACEXPLORERS.rocket.pos.y){
+    randomPlanetPos();
+  }
 
 }
 
@@ -245,12 +248,15 @@ function resetGame(){
   prevScore = 0;
   gameOver = false;
   timeRemaining = 61;
-  SPACEXPLORERS.earth.pos.x = 650;
-  SPACEXPLORERS.earth.pos.y = 425;
-  SPACEXPLORERS.mars.pos.x = 650;
-  SPACEXPLORERS.mars.pos.y = 75;
   SPACEXPLORERS.rocket.pos.x = 650;
   SPACEXPLORERS.rocket.pos.y = 250;
+  SPACEXPLORERS.earth.pos.x = 650;
+  SPACEXPLORERS.earth.pos.y = 425;
+  SPACEXPLORERS.enemyShip.pos.x = 450;
+  SPACEXPLORERS.enemyShip.pos.y = 250;
+  SPACEXPLORERS.mars.pos.x = 650;
+  SPACEXPLORERS.mars.pos.y = 75;
+ 
 }
 
 
