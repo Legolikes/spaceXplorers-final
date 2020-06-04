@@ -8,7 +8,8 @@ Promise.all([
   loadImage('sky.png'),
   loadImage('rocket.png'),
   loadImage('mars.png'),
-  loadImage('earth.png')
+  loadImage('earth.png'),
+  loadImage('enemy.png'),
   ]).then(function main(images) {
  
 var cargo = false;
@@ -70,6 +71,14 @@ class Planet extends Rect
 
    }
  }
+ class EnemyShip extends Rect
+ {
+   constructor()
+   {
+      super(50, 20);
+
+   }
+ }
  class spaceXplorers
 {
   constructor(canvas)
@@ -85,6 +94,9 @@ class Planet extends Rect
     this.earth.pos.y = 425;
     this.mars.pos.x = 650;
     this.mars.pos.y = 75;
+    this.enemyShip = new EnemyShip();
+    this.enemyShip.pos.x = 450;
+    this.enemyShip.pos.y = 250;
     
     let lastTime;
     const callback = (millis) => {
@@ -97,6 +109,7 @@ class Planet extends Rect
       callback();
   }
   draw(){
+    //CHECK IF BACKROUND IS CLEAR!!!
     //this._context.fillStyle = '#000';
     //this._context.fillRect(0,0, this._canvas.width, this._canvas.height);
     this._context.drawImage(images[0], 0, 0, this._canvas.width, this._canvas.height);
@@ -104,7 +117,9 @@ class Planet extends Rect
     
     this.drawMars(this.mars);
     this.drawEarth(this.earth);
+    this.drawEnemyShip(this.enemyShip);
     this.drawRocket(this.rocket);
+    
   }
   drawRocket(rect)
     {
@@ -125,6 +140,10 @@ class Planet extends Rect
     //this._context.fillRect(rect.left, rect.top, rect.size.x, rect.size.y);
     this._context.drawImage(images[3], rect.left, rect.top, rect.size.x, rect.size.y);
     }
+  drawEnemyShip(rect)
+  {
+    this._context.drawImage(images[4], rect.left, rect.top, rect.size.x, rect.size.y);
+  }
   
   update() {
     //console.log(gameOver);
@@ -164,6 +183,9 @@ class Planet extends Rect
      displayResults();
           }
       }
+   if(this.rocket.bottom > this.enemyShip.top && this.rocket.top < this.enemyShip.bottom && this.rocket.right > this.enemyShip.left && this.rocket.left < this.enemyShip.right ) {
+      timeRemaining = 0;
+    }
     this.draw();
     
     if (gameOver === false){
@@ -206,12 +228,14 @@ function checkKey2(e) {
 
 
 function randomPlanetPos(){
- SPACEXPLORERS.mars.pos.x = Math.floor(Math.random() * 1200)+ 50;
+  SPACEXPLORERS.mars.pos.x = Math.floor(Math.random() * 1200)+ 50;
   
   SPACEXPLORERS.earth.pos.x = Math.floor(Math.random() *1200)+ 50;
   SPACEXPLORERS.mars.pos.y = Math.floor(Math.random() * 400) +50 ;
   
   SPACEXPLORERS.earth.pos.y = Math.floor(Math.random() *400) +50;
+  SPACEXPLORERS.enemyShip.pos.x = Math.floor(Math.random() *1200) +50;
+  SPACEXPLORERS.enemyShip.pos.y = Math.floor(Math.random() *400) +50;
 
 }
 
