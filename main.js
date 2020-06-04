@@ -19,6 +19,7 @@ var gameOver = true;
 var timeRemaining = 60;
 var cargoFill = "empty";
 
+
 displayResults();
 
     class Vec
@@ -97,6 +98,15 @@ class Planet extends Rect
     this.enemyShip = new EnemyShip();
     this.enemyShip.pos.x = 450;
     this.enemyShip.pos.y = 250;
+    this.enemyShip2 = new EnemyShip();
+    this.enemyShip2.pos.x = 250;
+    this.enemyShip2.pos.y = 250;
+    this.enemyShip3 = new EnemyShip();
+    this.enemyShip3.pos.x = 850;
+    this.enemyShip3.pos.y = 250;
+    this.enemyShip4 = new EnemyShip();
+    this.enemyShip4.pos.x = 1050;
+    this.enemyShip4.pos.y = 250;
     
     let lastTime;
     const callback = (millis) => {
@@ -118,6 +128,9 @@ class Planet extends Rect
     this.drawMars(this.mars);
     this.drawEarth(this.earth);
     this.drawEnemyShip(this.enemyShip);
+    this.drawEnemyShip(this.enemyShip2);
+    this.drawEnemyShip(this.enemyShip3);
+    this.drawEnemyShip(this.enemyShip4);
     this.drawRocket(this.rocket);
     
   }
@@ -150,28 +163,29 @@ class Planet extends Rect
     if (gameOver === false){
     timeRemaining = timeRemaining - 0.015;
     displayResults();
+     if(this.rocket.bottom > this.earth.top && this.rocket.top < this.earth.bottom && this.rocket.right > this.earth.left && this.rocket.left < this.earth.right ) {
+      cargo = true;
+      cargoFill = "full";
+      displayResults();
+    }
     }
     if (timeRemaining <= 1){
       gameOver = true;
       displayResults();
     }
     if (this.rocket.pos.y < 0){
-        this.rocket.pos.y = 0;
-        }
-    if (this.rocket.pos.y > this._canvas.height){
         this.rocket.pos.y = this._canvas.height;
         }
-    if (this.rocket.pos.x < 0){
-        this.rocket.pos.x = 0;
+    if (this.rocket.pos.y > this._canvas.height){
+        this.rocket.pos.y = 0;
         }
-    if (this.rocket.pos.x > this._canvas.width){
+    if (this.rocket.pos.x < 0){
         this.rocket.pos.x = this._canvas.width;
         }
-    if(this.rocket.bottom > this.earth.top && this.rocket.top < this.earth.bottom && this.rocket.right > this.earth.left && this.rocket.left < this.earth.right ) {
-      cargo = true;
-      cargoFill = "full";
-      displayResults();
-    }
+    if (this.rocket.pos.x > this._canvas.width){
+        this.rocket.pos.x = 0;
+        }
+   
     if(this.rocket.bottom > this.mars.top && this.rocket.top < this.mars.bottom && this.rocket.right > this.mars.left && this.rocket.left < this.mars.right && cargo===true){
      cargo = false;
      cargoFill = "empty";
@@ -186,12 +200,21 @@ class Planet extends Rect
    if(this.rocket.bottom > this.enemyShip.top && this.rocket.top < this.enemyShip.bottom && this.rocket.right > this.enemyShip.left && this.rocket.left < this.enemyShip.right ) {
       timeRemaining = 0;
     }
+  if(this.rocket.bottom > this.enemyShip2.top && this.rocket.top < this.enemyShip2.bottom && this.rocket.right > this.enemyShip2.left && this.rocket.left < this.enemyShip2.right ) {
+      timeRemaining = 0;
+    }
+  if(this.rocket.bottom > this.enemyShip3.top && this.rocket.top < this.enemyShip3.bottom && this.rocket.right > this.enemyShip3.left && this.rocket.left < this.enemyShip3.right ) {
+      timeRemaining = 0;
+    }
+  if(this.rocket.bottom > this.enemyShip4.top && this.rocket.top < this.enemyShip4.bottom && this.rocket.right > this.enemyShip4.left && this.rocket.left < this.enemyShip4.right ) {
+      timeRemaining = 0;
+    }
     this.draw();
     
     if (gameOver === false){
      document.onkeydown = checkKey;
     }else{
-      document.onkeydown = checkKey2;
+      document.onkeydown = null;
       }
     }
 }
@@ -216,14 +239,6 @@ function checkKey(e) {
     }
 
   }
-function checkKey2(e) {
-
-    e = e || window.event;
-
-    if (e.keyCode == '76') {
-      resetGame();
-    }
-  }
 
 
 
@@ -236,27 +251,61 @@ function randomPlanetPos(){
   SPACEXPLORERS.earth.pos.y = Math.floor(Math.random() *400) +50;
   SPACEXPLORERS.enemyShip.pos.x = Math.floor(Math.random() *1200) +50;
   SPACEXPLORERS.enemyShip.pos.y = Math.floor(Math.random() *400) +50;
-  if(SPACEXPLORERS.enemyShip.pos.y + 5 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.y - 5 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.x + 5 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.x - 5 < SPACEXPLORERS.rocket.pos.y){
+  if(SPACEXPLORERS.enemyShip.pos.y + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.y - 8 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.x + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.x - 8 < SPACEXPLORERS.rocket.pos.y){
+    randomPlanetPos();
+  }
+  SPACEXPLORERS.enemyShip2.pos.x = Math.floor(Math.random() *1200) +50;
+  SPACEXPLORERS.enemyShip2.pos.y = Math.floor(Math.random() *400) +50;
+  if(SPACEXPLORERS.enemyShip2.pos.y + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip2.pos.y - 8 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip2.pos.x + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip2.pos.x - 8 < SPACEXPLORERS.rocket.pos.y){
+    randomPlanetPos();
+  }
+  SPACEXPLORERS.enemyShip3.pos.x = Math.floor(Math.random() *1200) +50;
+  SPACEXPLORERS.enemyShip3.pos.y = Math.floor(Math.random() *400) +50;
+  if(SPACEXPLORERS.enemyShip3.pos.y + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip3.pos.y - 8 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip3.pos.x + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip3.pos.x - 8 < SPACEXPLORERS.rocket.pos.y){
+    randomPlanetPos();
+  }
+  SPACEXPLORERS.enemyShip4.pos.x = Math.floor(Math.random() *1200) +50;
+  SPACEXPLORERS.enemyShip4.pos.y = Math.floor(Math.random() *400) +50;
+  if(SPACEXPLORERS.enemyShip4.pos.y + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip4.pos.y - 8 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip4.pos.x + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip4.pos.x - 8 < SPACEXPLORERS.rocket.pos.y){
     randomPlanetPos();
   }
 
 }
-
+var startButton = document.getElementById('startButton');
+var resetButton = document.getElementById('resetButton');
+startButton.addEventListener("click", startGame);
+resetButton.addEventListener("click", resetGame);
 
 function resetGame(){
   cargo = false;
+  cargoFill ="empty";
   prevScore = 0;
-  gameOver = false;
-  timeRemaining = 61;
+  gameOver = true;
+  timeRemaining = 60;
+  displayResults();
   SPACEXPLORERS.rocket.pos.x = 650;
   SPACEXPLORERS.rocket.pos.y = 250;
   SPACEXPLORERS.earth.pos.x = 650;
   SPACEXPLORERS.earth.pos.y = 425;
   SPACEXPLORERS.enemyShip.pos.x = 450;
   SPACEXPLORERS.enemyShip.pos.y = 250;
+  SPACEXPLORERS.enemyShip2.pos.x = 250;
+  SPACEXPLORERS.enemyShip2.pos.y = 250;
+  SPACEXPLORERS.enemyShip3.pos.x = 850;
+  SPACEXPLORERS.enemyShip3.pos.y = 250;
+  SPACEXPLORERS.enemyShip4.pos.x = 1050;
+  SPACEXPLORERS.enemyShip4.pos.y = 250;
   SPACEXPLORERS.mars.pos.x = 650;
   SPACEXPLORERS.mars.pos.y = 75;
  
+}
+function startGame(){
+  if(timeRemaining === 60){
+  cargo = false;
+  prevScore = 0;
+  gameOver = false;
+  timeRemaining = 61;
+  }
 }
 
 
