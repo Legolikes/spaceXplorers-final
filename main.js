@@ -206,9 +206,12 @@ function checkKey2(e) {
 
 
 function randomPlanetPos(){
-  SPACEXPLORERS.mars.pos.x = Math.floor(Math.random() * 1300) ;
+ SPACEXPLORERS.mars.pos.x = Math.floor(Math.random() * 1200)+ 50;
   
-  SPACEXPLORERS.earth.pos.x = Math.floor(Math.random() *1300);
+  SPACEXPLORERS.earth.pos.x = Math.floor(Math.random() *1200)+ 50;
+  SPACEXPLORERS.mars.pos.y = Math.floor(Math.random() * 400) +50 ;
+  
+  SPACEXPLORERS.earth.pos.y = Math.floor(Math.random() *400) +50;
 
 }
 
