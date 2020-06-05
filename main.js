@@ -244,31 +244,30 @@ function checkKey(e) {
 
 function randomPlanetPos(){
   SPACEXPLORERS.mars.pos.x = Math.floor(Math.random() * 1200)+ 50;
-  
   SPACEXPLORERS.earth.pos.x = Math.floor(Math.random() *1200)+ 50;
   SPACEXPLORERS.mars.pos.y = Math.floor(Math.random() * 400) +50 ;
-  
   SPACEXPLORERS.earth.pos.y = Math.floor(Math.random() *400) +50;
   SPACEXPLORERS.enemyShip.pos.x = Math.floor(Math.random() *1200) +50;
   SPACEXPLORERS.enemyShip.pos.y = Math.floor(Math.random() *400) +50;
-  if(SPACEXPLORERS.enemyShip.pos.y + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.y - 8 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.x + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip.pos.x - 8 < SPACEXPLORERS.rocket.pos.y){
-    randomPlanetPos();
-  }
   SPACEXPLORERS.enemyShip2.pos.x = Math.floor(Math.random() *1200) +50;
   SPACEXPLORERS.enemyShip2.pos.y = Math.floor(Math.random() *400) +50;
-  if(SPACEXPLORERS.enemyShip2.pos.y + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip2.pos.y - 8 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip2.pos.x + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip2.pos.x - 8 < SPACEXPLORERS.rocket.pos.y){
-    randomPlanetPos();
-  }
   SPACEXPLORERS.enemyShip3.pos.x = Math.floor(Math.random() *1200) +50;
   SPACEXPLORERS.enemyShip3.pos.y = Math.floor(Math.random() *400) +50;
-  if(SPACEXPLORERS.enemyShip3.pos.y + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip3.pos.y - 8 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip3.pos.x + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip3.pos.x - 8 < SPACEXPLORERS.rocket.pos.y){
-    randomPlanetPos();
-  }
   SPACEXPLORERS.enemyShip4.pos.x = Math.floor(Math.random() *1200) +50;
   SPACEXPLORERS.enemyShip4.pos.y = Math.floor(Math.random() *400) +50;
-  if(SPACEXPLORERS.enemyShip4.pos.y + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip4.pos.y - 8 < SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip4.pos.x + 8 > SPACEXPLORERS.rocket.pos.y && SPACEXPLORERS.enemyShip4.pos.x - 8 < SPACEXPLORERS.rocket.pos.y){
-    randomPlanetPos();
-  }
+  if(SPACEXPLORERS.rocket.bottom > SPACEXPLORERS.enemyShip.top && SPACEXPLORERS.rocket.top < SPACEXPLORERS.enemyShip.bottom && SPACEXPLORERS.rocket.right > SPACEXPLORERS.enemyShip.left && SPACEXPLORERS.rocket.left < SPACEXPLORERS.enemyShip.right ) {
+      randomPlanetPos();
+    }
+  if(SPACEXPLORERS.rocket.bottom > SPACEXPLORERS.enemyShip2.top && SPACEXPLORERS.rocket.top < SPACEXPLORERS.enemyShip2.bottom && SPACEXPLORERS.rocket.right > SPACEXPLORERS.enemyShip2.left && SPACEXPLORERS.rocket.left < SPACEXPLORERS.enemyShip2.right ) {
+      randomPlanetPos();
+    }
+  if(SPACEXPLORERS.rocket.bottom > SPACEXPLORERS.enemyShip3.top && SPACEXPLORERS.rocket.top < SPACEXPLORERS.enemyShip3.bottom && SPACEXPLORERS.rocket.right > SPACEXPLORERS.enemyShip3.left && SPACEXPLORERS.rocket.left < SPACEXPLORERS.enemyShip3.right ) {
+      randomPlanetPos();
+    }
+  if(SPACEXPLORERS.rocket.bottom > SPACEXPLORERS.enemyShip4.top && SPACEXPLORERS.rocket.top < SPACEXPLORERS.enemyShip4.bottom && SPACEXPLORERS.rocket.right > SPACEXPLORERS.enemyShip4.left && SPACEXPLORERS.rocket.left < SPACEXPLORERS.enemyShip4.right ) {
+      randomPlanetPos();
+    }
+  
 
 }
 var startButton = document.getElementById('startButton');
